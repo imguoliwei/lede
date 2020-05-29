@@ -32,13 +32,14 @@ jobs:
         with:
           ref: master
 
-      - name: test
+      - name: GetLatestSource
         run: |
-          ls -la
           cd ..
-          ls -la
-          df -lh
-          exit
+          mv ./lede/.config .
+          rm -r lede
+          git clone https://github.com/coolsnowwolf/lede.git
+          mv .config ./lede
+          cd lede
       
       - name: Space cleanup
         env:
@@ -55,6 +56,7 @@ jobs:
           
       - name: Update feeds
         run: |
+          sed -i 's/\"#src-git\"/\"src-git\"/g' ./feeds.conf.default
           ./scripts/feeds update -a
           ./scripts/feeds install -a
           
