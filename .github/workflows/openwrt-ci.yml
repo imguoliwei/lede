@@ -36,10 +36,11 @@ jobs:
         run: |
           cd ..
           mv ./lede/.config .
-          rm -r lede
+          rm -rf lede
           git clone https://github.com/coolsnowwolf/lede.git
           mv .config ./lede
           cd lede
+          df -lh
       
       - name: Space cleanup
         env:
