@@ -10,9 +10,9 @@
 name: OpenWrt-CI
 
 on:
-  #push:
-    #branches: 
-      #- master
+  push:
+    branches: 
+      - master
   # schedule:
   #   - cron: 0 20 * * *
   # release:
@@ -32,6 +32,14 @@ jobs:
         with:
           ref: master
 
+      - name: test
+        run: |
+          ls -la
+          cd ..
+          ls -la
+          df -lh
+          exit
+      
       - name: Space cleanup
         env:
           DEBIAN_FRONTEND: noninteractive
